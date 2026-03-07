@@ -80,6 +80,22 @@ const styles = {
     marginBottom: 8,
   },
 
+  waveContainer: {
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  width: "100%",
+  lineHeight: 0,
+},
+
+loginBg: {
+  minHeight: "100vh",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  position: "relative", // important
+},
+
   // Banner
   banner: {
     background: "#450a0a",

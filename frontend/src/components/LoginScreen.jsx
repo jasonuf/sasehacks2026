@@ -12,6 +12,7 @@ export default function LoginScreen({ onLogin, error }) {
   return (
     <div style={styles.loginBg}>
       <div style={styles.loginCard}>
+
         <div style={styles.loginLogo}>✓</div>
 
         <h1 style={styles.loginTitle}>Accountable</h1>
@@ -52,6 +53,16 @@ export default function LoginScreen({ onLogin, error }) {
         <p style={styles.hint}>
           Try: alice / pass · bob / pass
         </p>
+      </div>
+       {/* WAVE GOES HERE */}
+      <div style={styles.waveContainer}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+          <path
+            fill="#94B4C1"
+            fillOpacity="1"
+            d="M0,224L60,224C120,224,240,224,360,192C480,160,600,96,720,90.7C840,85,960,139,1080,154.7C1200,171,1320,149,1380,138.7L1440,128L1440,320L0,320Z"
+          />
+        </svg>
       </div>
     </div>
   );
