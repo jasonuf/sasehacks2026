@@ -25,14 +25,17 @@ const styles = {
     padding: "48px 40px",
     width: "100%",
     maxWidth: 400,
-    boxShadow: "0 0 60px rgba(139,92,246,0.15)",
+    boxShadow: "0 0 60px #56707b",
+    position: "relative",
+    zIndex: 2
+
   },
 
   loginLogo: {
     fontSize: 40,
     textAlign: "center",
     marginBottom: 12,
-    color: "#000000",
+    color: "#EFECE3",
   },
 
   loginTitle: {
@@ -40,13 +43,13 @@ const styles = {
     fontSize: 28,
     fontWeight: 700,
     textAlign: "center",
-    color: "#000000",
+    color: "#EFECE3",
     letterSpacing: "0.05em",
   },
 
   loginSub: {
     textAlign: "center",
-    color: "#6b7280",
+    color: "#EFECE3",
     fontSize: 13,
     marginBottom: 32,
     marginTop: 0,
@@ -55,8 +58,8 @@ const styles = {
   loginBtn: {
     width: "100%",
     padding: "14px",
-    background: "linear-gradient(135deg, #7c3aed, #a855f7)",
-    color: "#fff",
+    background: "linear-gradient(135deg, #EFECE3, #EFECE3)",
+    color: "#000000",
     border: "none",
     borderRadius: 8,
     fontSize: 15,
@@ -69,7 +72,7 @@ const styles = {
   hint: {
     textAlign: "center",
     fontSize: 11,
-    color: "#4b5563",
+    color: "#EFECE3",
     marginTop: 16,
   },
 
@@ -86,6 +89,13 @@ const styles = {
   left: 0,
   width: "100%",
   lineHeight: 0,
+  zIndex: 1
+  
+},
+
+waveSvg: {
+  width: "110%",
+  animation: "waveMove 8s linear infinite"
 },
 
 loginBg: {
@@ -228,7 +238,7 @@ loginBg: {
   label: {
     display: "block",
     fontSize: 12,
-    color: "#6b7280",
+    color: "#EFECE3",
     marginBottom: 8,
     letterSpacing: "0.08em",
     textTransform: "uppercase",
@@ -236,11 +246,11 @@ loginBg: {
 
   input: {
     width: "100%",
-    background: "#0d0d17",
-    border: "1px solid #2a2a3e",
+    background: "#EFECE3",
+    border: "1px solid #EFECE3",
     borderRadius: 8,
     padding: "10px 14px",
-    color: "#e2e8f0",
+    color: "#000000",
     fontSize: 14,
     boxSizing: "border-box",
     outline: "none",
