@@ -1,8 +1,8 @@
 const styles = {
   app: {
     minHeight: "100vh",
-    background: "#41431B",
-    color: "#F8F3E1",
+    background: "#EFECE3",
+    color: "#0f0e0d",
     fontFamily: "'Times New Roman', Times, serif",
     display: "flex",
     flexDirection: "column",
@@ -11,7 +11,7 @@ const styles = {
   // Login
   loginBg: {
     minHeight: "100vh",
-    background: "radial-gradient(ellipse at 50% 40%, #1a0a2e 0%, #0a0a0f 70%)",
+    background: "#EFECE3", //background color
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -19,8 +19,8 @@ const styles = {
   },
 
   loginCard: {
-    background: "#11111b",
-    border: "1px solid #2a2a3e",
+    background: "#547792", //login background
+    border: "1px solid #547792",
     borderRadius: 16,
     padding: "48px 40px",
     width: "100%",
@@ -32,7 +32,7 @@ const styles = {
     fontSize: 40,
     textAlign: "center",
     marginBottom: 12,
-    color: "#8667e3",
+    color: "#000000",
   },
 
   loginTitle: {
@@ -40,7 +40,7 @@ const styles = {
     fontSize: 28,
     fontWeight: 700,
     textAlign: "center",
-    color: "#f1f5f9",
+    color: "#000000",
     letterSpacing: "0.05em",
   },
 
@@ -118,7 +118,7 @@ const styles = {
   navBrand: {
     fontWeight: 800,
     fontSize: 16,
-    color: "#a78bfa",
+    color: "#82b8f5",
     letterSpacing: "0.08em",
     marginRight: 16,
   },
@@ -191,7 +191,7 @@ const styles = {
   },
 
   card: {
-    background: "#11111b",
+    background: "#2c2131",
     border: "1px solid #1e1e2e",
     borderRadius: 12,
     padding: 24,
