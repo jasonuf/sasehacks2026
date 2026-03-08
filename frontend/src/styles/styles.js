@@ -52,10 +52,10 @@ const styles = {
 },
 
   loginLogo: {
-    fontSize: 40,
-    textAlign: "center",
-    marginBottom: 12,
-    color: "#EFECE3",
+    width: "200px",
+    height: "auto",
+    display: "block",
+    marginBottom: "16px",
   },
 
   loginTitle: {
