@@ -39,23 +39,27 @@ const styles = {
     zIndex: 2,
 },
   loginCard: {
-    background: "#547792", //login background
+  background: "#547792", //login background
   border: "1px solid #547792",
   borderRadius: 16,
   padding: "48px 40px",
   width: "100%",
   maxWidth: 400,
-    boxShadow: "0 0 60px #56707b",
+  boxShadow: "0 0 60px #56707b",
   position: "relative",
-    zIndex: 2
+  zIndex: 2
 
 },
+    logoContainer: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: "16px"
+  },
 
   loginLogo: {
     width: "200px",
-    height: "auto",
-    display: "block",
-    marginBottom: "16px",
+    height: "auto"
   },
 
   loginTitle: {
@@ -71,6 +75,7 @@ const styles = {
     textAlign: "center",
     color: "#EFECE3",
     fontSize: 13,
+    fontWeight: 700,
     marginBottom: 32,
     marginTop: 0,
   },
