@@ -39,29 +39,7 @@ const toggleTask = (taskId) => {
       lastStreakDate: last,
     };
   });
-};
-
-      // 🔥 Streak logic
-      const allCompleted =
-        newTasks.length > 0 &&
-        newTasks.every((t) => t.completedDates.includes(today()));
-
-      let streak = u.streak || 0;
-      let last = u.lastStreakDate;
-
-      if (allCompleted && last !== today()) {
-        streak += 1;
-        last = today();
-      }
-
-      return {
-        ...u,
-        tasks: newTasks,
-        streak,
-        lastStreakDate: last,
-      };
-    });
-  };
+}
 
   const pct = user.tasks.length
     ? Math.round(
