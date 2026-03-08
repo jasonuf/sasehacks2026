@@ -48,9 +48,9 @@ export default function LoginScreen({ onLogin, error }) {
       bottom: 0,
       left: 0,
       right: 0,
-      height: "0", // Let the children position themselves relative to the very bottom
+      height: "200px", // Let the children position themselves relative to the very bottom
       pointerEvents: "none",
-      zIndex: 4, // Higher than the waveContainer (which is zIndex 1)
+      zIndex: 3, // Higher than the waveContainer (which is zIndex 1)
     }}>
       <img
         src="seaweed.webp.webp"
@@ -58,8 +58,8 @@ export default function LoginScreen({ onLogin, error }) {
         style={{
           ...styles.seaweed,
           left: "5%", 
-          bottom: "-20px", // Pushes the base slightly off-screen for a "planted" look
-          width: "250px",  // Enlarged size
+          bottom: "0", // Pushes the base slightly off-screen for a "planted" look
+          width: "200px",  // Enlarged size
           height: "auto",
         }}
       />
@@ -70,8 +70,8 @@ export default function LoginScreen({ onLogin, error }) {
         style={{
           ...styles.seaweed,
           right: "5%",
-          bottom: "-20px", 
-          width: "250px", // Enlarged size
+          bottom: "0", 
+          width: "200px", // Enlarged size
           height: "auto",
           transform: "scaleX(-1)", // Optional: Flips the image so it's not a mirror image
         }}
