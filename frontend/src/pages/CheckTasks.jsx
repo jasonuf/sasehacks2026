@@ -1,7 +1,7 @@
 import styles from "../styles/styles";
 import { today } from "../utils/date";
 
-export default function CheckTasks({ user, updateUser }) {
+export default function CheckTasks({ user = { tasks: [] }, updateUser }) {
   const toggleTask = (taskId) => {
     updateUser((u) => {
       const newTasks = u.tasks.map((t) => {

@@ -24,6 +24,13 @@ export default function App() {
   const [registerError, setRegisterError] = useState("");
   const [friendFailures, setFriendFailures] = useState([]);
 
+  // 👇 USER STATE (tasks + streak)
+  const [user, setUser] = useState({
+    tasks: [],
+    streak: 0,
+    lastStreakDate: null,
+  });
+
   const token = session?.token;
   const username = session?.username;
 
@@ -36,7 +43,7 @@ export default function App() {
       );
       setFriendFailures(failures);
     } catch {
-      // silently ignore — banner is non-critical
+      // banner non-critical
     }
   }, [token]);
 
@@ -59,7 +66,6 @@ export default function App() {
   const register = async (email, username, password) => {
     try {
       await apiRegister(email, username, password);
-      // Auto-login after successful registration
       const data = await apiLogin(email, password);
       const sess = { token: data.access_token, username };
       setCookie(SESSION_KEY, sess);
@@ -80,15 +86,22 @@ export default function App() {
       return (
         <RegisterScreen
           onRegister={register}
-          onSwitchToLogin={() => { setRegisterError(""); setAuthPage("login"); }}
+          onSwitchToLogin={() => {
+            setRegisterError("");
+            setAuthPage("login");
+          }}
           error={registerError}
         />
       );
     }
+
     return (
       <LoginScreen
         onLogin={login}
-        onSwitchToRegister={() => { setLoginError(""); setAuthPage("register"); }}
+        onSwitchToRegister={() => {
+          setLoginError("");
+          setAuthPage("register");
+        }}
         error={loginError}
       />
     );
@@ -97,6 +110,7 @@ export default function App() {
   return (
     <div style={styles.app}>
       <FailureBanner failures={friendFailures} />
+
       <Navbar
         page={page}
         setPage={setPage}
@@ -105,9 +119,13 @@ export default function App() {
       />
 
       <main style={styles.main}>
-        {page === "add" && <AddTasks token={token} />}
+        {page === "add" && (
+          <AddTasks user={user} updateUser={setUser} />
+        )}
 
-        {page === "check" && <CheckTasks token={token} />}
+        {page === "check" && (
+          <CheckTasks user={user} updateUser={setUser} />
+        )}
 
         {page === "friends" && (
           <Friends token={token} onFriendsChange={loadFriendsMissed} />
