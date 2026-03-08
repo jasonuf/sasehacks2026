@@ -49,7 +49,7 @@ export default function LoginScreen({ onLogin, error }) {
       bottom: 0,
       left: 0,
       right: 0,
-      height: "300px", 
+      height: "350px", 
       width: "100%",
       pointerEvents: "none",
       zIndex: 3, 
@@ -62,7 +62,7 @@ export default function LoginScreen({ onLogin, error }) {
           position: "absolute",
           left: "0", 
           bottom: "0", // Pushes the base slightly off-screen for a "planted" look
-          width: "300px",  // Enlarged size
+          width: "350px",  // Enlarged size
           height: "auto",
         }}
       />
@@ -75,9 +75,9 @@ export default function LoginScreen({ onLogin, error }) {
           position: "absolute",
           right: "0",
           bottom: "0", 
-          width: "300px", // Enlarged size
+          width: "350px", // Enlarged size
           height: "auto",
-          transform: "scaleX(-1)", // Optional: Flips the image so it's not a mirror image
+          transform: "scaleX(-1)", 
         }}
       />
     </div>
