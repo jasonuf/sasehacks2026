@@ -24,7 +24,7 @@ export default function App() {
   const [registerError, setRegisterError] = useState("");
   const [friendFailures, setFriendFailures] = useState([]);
 
-  // 👇 USER STATE (tasks + streak)
+  // 🟢 NEW: user state
   const [user, setUser] = useState({
     tasks: [],
     streak: 0,
@@ -42,9 +42,7 @@ export default function App() {
         f.missed_tasks.map((t) => ({ friend: f.friend_username, task: t.title }))
       );
       setFriendFailures(failures);
-    } catch {
-      // banner non-critical
-    }
+    } catch {}
   }, [token]);
 
   useEffect(() => {
@@ -58,6 +56,9 @@ export default function App() {
       setCookie(SESSION_KEY, sess);
       setSession(sess);
       setLoginError("");
+
+      // initialize user on login
+      setUser({ tasks: [], streak: 0, lastStreakDate: null });
     } catch {
       setLoginError("Invalid email or password.");
     }
@@ -71,6 +72,8 @@ export default function App() {
       setCookie(SESSION_KEY, sess);
       setSession(sess);
       setRegisterError("");
+
+      setUser({ tasks: [], streak: 0, lastStreakDate: null });
     } catch (err) {
       setRegisterError(err.message || "Registration failed.");
     }
@@ -79,6 +82,7 @@ export default function App() {
   const logout = () => {
     deleteCookie(SESSION_KEY);
     setSession(null);
+    setUser({ tasks: [], streak: 0, lastStreakDate: null });
   };
 
   if (!session) {
@@ -86,22 +90,15 @@ export default function App() {
       return (
         <RegisterScreen
           onRegister={register}
-          onSwitchToLogin={() => {
-            setRegisterError("");
-            setAuthPage("login");
-          }}
+          onSwitchToLogin={() => { setRegisterError(""); setAuthPage("login"); }}
           error={registerError}
         />
       );
     }
-
     return (
       <LoginScreen
         onLogin={login}
-        onSwitchToRegister={() => {
-          setLoginError("");
-          setAuthPage("register");
-        }}
+        onSwitchToRegister={() => { setLoginError(""); setAuthPage("register"); }}
         error={loginError}
       />
     );
@@ -110,7 +107,6 @@ export default function App() {
   return (
     <div style={styles.app}>
       <FailureBanner failures={friendFailures} />
-
       <Navbar
         page={page}
         setPage={setPage}
