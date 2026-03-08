@@ -149,7 +149,7 @@ loginBg: {
 
   // Navbar
   nav: {
-    background: "#11111b",
+    background: "#547792",
     borderBottom: "1px solid #1e1e2e",
     padding: "0 24px",
     display: "flex",
