@@ -95,7 +95,7 @@ const styles = {
 
 waveSvg: {
   width: "110%",
-  animation: "waveMove 8s linear infinite"
+  animation: "waveMove 4s linear infinite"
 },
 
 loginBg: {

@@ -39,11 +39,11 @@
 }
 
 @keyframes waveMove {
-  0% {
+  from {
     transform: translateX(0);
   }
 
-  100% {
-    transform: translateX(-100px);
+  to {
+    transform: translateX(-100px); 
   }
 }

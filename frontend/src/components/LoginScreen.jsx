@@ -15,7 +15,7 @@ export default function LoginScreen({ onLogin, error }) {
 
         <div style={styles.loginLogo}>✓</div>
 
-        <h1 style={styles.loginTitle}>Accountable</h1>
+        <h1 style={styles.loginTitle}>Aurora</h1>
         <p style={styles.loginSub}>Hold each other to it.</p>
 
         <div style={styles.field}>
@@ -57,10 +57,7 @@ export default function LoginScreen({ onLogin, error }) {
        {/* WAVE GOES HERE */}
       <div style={styles.waveContainer}>
         <svg 
-          style={styles.waveSvg} 
-          xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 1440 320"
-        >
+          style={styles.waveSvg} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
           <path
             fill="#94B4C1"
             fillOpacity="1"
