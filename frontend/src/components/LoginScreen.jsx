@@ -43,32 +43,42 @@ export default function LoginScreen({ onLogin, error }) {
         />
       ))}
     </div>
-        {/* SEAWEED LOWER CORNERS */}
-    <div style={styles.seaweedContainer}>
-      <img
-        src="seaweed.webp.webp"
-        alt="seaweed left"
-        style={{
-          ...styles.seaweed,
-          left: "5%",
-          bottom: 0,
-          witdh: 120,
-          transformOrigin: "bottom center",
-        }}
-      />
+{/* SEAWEED LOWER CORNERS */}
+  <div style={{
+    position: "fixed", // Keeps container locked to the viewport
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: "200px", // Give it some height for the seaweed to sit in
+    pointerEvents: "none", // Allows clicking "through" the seaweed to the inputs
+    zIndex: 1, // Ensures it's above the background but below the login card if needed
+  }}>
+    <img
+      src="seaweed.webp.webp"
+      alt="seaweed left"
+      style={{
+        ...styles.seaweed,
+        position: "absolute",
+        left: "2%", // Slight padding from the edge
+        bottom: "-10px", // Tuck the base slightly below the screen
+        width: "150px",
+        transformOrigin: "bottom center",
+      }}
+    />
 
-      <img
-        src="seaweed.webp.webp"
-        alt="seaweed right"
-        style={{
-          ...styles.seaweed,
-          right: "5%",
-          bottom: 0,
-          width: 120,
-          transformOrigin: "bottom center",
-        }}
-      />
-    </div>
+    <img
+      src="seaweed.webp.webp"
+      alt="seaweed right"
+      style={{
+        ...styles.seaweed,
+        position: "absolute",
+        right: "2%",
+        bottom: "-10px",
+        width: "150px",
+        transformOrigin: "bottom center",
+      }}
+    />
+  </div>
 
       <div style={styles.loginCard}>
 
