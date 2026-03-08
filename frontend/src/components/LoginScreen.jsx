@@ -45,9 +45,9 @@ export default function LoginScreen({ onLogin, error }) {
     </div>
       <div style={styles.loginCard}>
 
-        <div style={styles.loginLogo}>✓</div>
+        <img src="/appLogo.png" alt="Logo" width="120" />
 
-        <h1 style={styles.loginTitle}>Aurora</h1>
+        <h1 style={styles.loginTitle}>TideTracker</h1>
         <p style={styles.loginSub}>Hold each other to it.</p>
 
         <div style={styles.field}>
