@@ -52,6 +52,8 @@ export default function LoginScreen({ onLogin, error }) {
           ...styles.seaweed,
           left: "5%",
           bottom: 0,
+          witdh: 120,
+          transformOrigin: "bottom left",
         }}
       />
 
@@ -62,6 +64,8 @@ export default function LoginScreen({ onLogin, error }) {
           ...styles.seaweed,
           right: "5%",
           bottom: 0,
+          width: 120,
+          transformOrigin: "bottom right",
         }}
       />
     </div>
