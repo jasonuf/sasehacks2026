@@ -9,39 +9,6 @@ export default function CheckTasks({ token }) {
     apiGetTasks(token).then(setTasks).catch(() => {});
   }, [token]);
 
-<<<<<<< HEAD
-      return {
-        ...t,
-        completedDates: done
-          ? t.completedDates.filter((d) => d !== today())
-          : [...t.completedDates, today()],
-      };
-    });
-
-    // 🔥 Check if ALL tasks are complete today
-    const allCompleted =
-      newTasks.length > 0 &&
-      newTasks.every((t) => t.completedDates.includes(today()));
-
-    let streak = u.streak || 0;
-    let last = u.lastStreakDate;
-
-    // Only increase streak if all tasks are done AND not counted today yet
-    if (allCompleted && last !== today()) {
-      streak += 1;
-      last = today();
-    }
-
-    // If tasks are NOT all complete today, do NOT increase streak
-    return {
-      ...u,
-      tasks: newTasks,
-      streak,
-      lastStreakDate: last,
-    };
-  });
-}
-=======
   const toggle = async (taskId, done) => {
     try {
       const updated = done
@@ -50,7 +17,6 @@ export default function CheckTasks({ token }) {
       setTasks((prev) => prev.map((t) => (t.id === taskId ? updated : t)));
     } catch {}
   };
->>>>>>> 4f30a1ae4945e2a071b01bddd946d84940efbafe
 
   const pct = tasks.length
     ? Math.round(
