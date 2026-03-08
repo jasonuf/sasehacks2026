@@ -183,7 +183,7 @@ loginBg: {
   navTab: {
     background: "transparent",
     border: "none",
-    color: "#6b7280",
+    color: "#000000",
     padding: "6px 14px",
     borderRadius: 6,
     cursor: "pointer",
@@ -205,12 +205,12 @@ loginBg: {
 
   navUser: {
     fontSize: 12,
-    color: "#4b5563",
+    color: "#010101",
   },
 
   logoutBtn: {
     background: "#EFECE3",
-    border: "1px solid #2a2a3e",
+    border: "1px solid #060606",
     color: "#000000",
     padding: "4px 12px",
     borderRadius: 6,
@@ -332,6 +332,7 @@ loginBg: {
     display: "block",
     fontSize: 15,
     fontWeight: 600,
+    color: "#FFFFFF",
   },
 
   taskNameDone: {
@@ -341,7 +342,7 @@ loginBg: {
 
   taskFreq: {
     fontSize: 11,
-    color: "#4b5563",
+    color: "#FFFFFF",
     marginTop: 2,
     display: "block",
   },
@@ -349,6 +350,7 @@ loginBg: {
   taskStatus: {
     fontSize: 12,
     fontWeight: 700,
+    color: "#FFFFFF",
   },
 
   empty: {
