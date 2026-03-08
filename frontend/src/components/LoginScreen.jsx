@@ -43,43 +43,40 @@ export default function LoginScreen({ onLogin, error }) {
         />
       ))}
     </div>
-{/* SEAWEED LOWER CORNERS */}
-  <div style={{
-    position: "fixed", // Keeps container locked to the viewport
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: "200px", // Give it some height for the seaweed to sit in
-    pointerEvents: "none", // Allows clicking "through" the seaweed to the inputs
-    zIndex: 1, // Ensures it's above the background but below the login card if needed
-  }}>
-    <img
-      src="seaweed.webp.webp"
-      alt="seaweed left"
-      style={{
-        ...styles.seaweed,
-        position: "absolute",
-        left: "2%", // Slight padding from the edge
-        bottom: "40px", // Tuck the base slightly below the screen
-        width: "150px",
-        transformOrigin: "bottom center",
-      }}
-    />
+    <div style={{
+      position: "fixed", 
+      bottom: 0,
+      left: 0,
+      right: 0,
+      height: "0", // Let the children position themselves relative to the very bottom
+      pointerEvents: "none",
+      zIndex: 4, // Higher than the waveContainer (which is zIndex 1)
+    }}>
+      <img
+        src="seaweed.webp.webp"
+        alt="seaweed left"
+        style={{
+          ...styles.seaweed,
+          left: "5%", 
+          bottom: "-20px", // Pushes the base slightly off-screen for a "planted" look
+          width: "250px",  // Enlarged size
+          height: "auto",
+        }}
+      />
 
-    <img
-      src="seaweed.webp.webp"
-      alt="seaweed right"
-      style={{
-        ...styles.seaweed,
-        position: "absolute",
-        right: "2%",
-        bottom: "40px",
-        width: "150px",
-        transformOrigin: "bottom center",
-      }}
-    />
-  </div>
-
+      <img
+        src="seaweed.webp.webp"
+        alt="seaweed right"
+        style={{
+          ...styles.seaweed,
+          right: "5%",
+          bottom: "-20px", 
+          width: "250px", // Enlarged size
+          height: "auto",
+          transform: "scaleX(-1)", // Optional: Flips the image so it's not a mirror image
+        }}
+      />
+    </div>
       <div style={styles.loginCard}>
 
         <div style={styles.loginLogo}>✓</div>
