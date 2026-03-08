@@ -9,7 +9,7 @@ export default function Navbar({ page, setPage, onLogout, username }) {
 
   return (
     <nav style={styles.nav}>
-      <span style={styles.navBrand}>Accountable</span>
+      <span style={styles.navBrand}>TideTracker</span>
 
       <div style={styles.navTabs}>
         {tabs.map(t => (
