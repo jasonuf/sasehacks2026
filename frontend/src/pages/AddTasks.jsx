@@ -1,37 +1,42 @@
 import { useState } from "react";
 import styles from "../styles/styles";
+import { apiCreateTask, FREQ_OPTIONS } from "../utils/api";
 
-export default function AddTasks({ user, updateUser }) {
+const today = () => new Date().toISOString().slice(0, 10);
+
+const commonTasks = [
+  { name: "Exercise", icon: "🏋️" },
+  { name: "Read", icon: "📚" },
+  { name: "Meditate", icon: "🧘" },
+  { name: "Cook", icon: "🍳" },
+  { name: "Sleep", icon: "😴" },
+  { name: "Shower", icon: "🚿" },
+  { name: "Drink Water", icon: "🚰" },
+  { name: "Write", icon: "✍️" },
+  { name: "Cleaning", icon: "🧹" },
+  { name: "Study", icon: "📖" },
+  { name: "Brush Teeth", icon: "🦷" },
+  { name: "Take out Trash", icon: "🗑️" },
+  { name: "Grocery Shopping", icon: "🛒" },
+  { name: "Laundry", icon: "🧺" },
+  { name: "Work", icon: "💼" },
+  { name: "Socialize", icon: "👥" },
+  { name: "Relax", icon: "🛋️" },
+  { name: "Hobby", icon: "🎨" },
+  { name: "Volunteer", icon: "🤝" },
+  { name: "Self-Care", icon: "🛀" },
+  { name: "Other", icon: "➕" },
+];
+
+export default function AddTasks({ token }) {
   const [taskType, setTaskType] = useState("");
-  const [frequency, setFrequency] = useState("Daily");
+  const [frequency, setFrequency] = useState("daily");
+  const [startTime, setStartTime] = useState("08:00");
+  const [anchorDate, setAnchorDate] = useState(today());
   const [submitted, setSubmitted] = useState(false);
   const [jellyfishList, setJellyfishList] = useState([]);
 
-  const freqOptions = ["Daily", "Weekly", "3x/week", "Weekdays", "Custom"];
-
-  const commonTasks = [
-    { name: "Exercise", icon: "🏋️" },
-    { name: "Read", icon: "📚" },
-    { name: "Meditate", icon: "🧘" },
-    { name: "Cook", icon: "🍳" },
-    { name: "Sleep", icon: "😴" },
-    { name: "Shower", icon: "🚿" },
-    { name: "Drink Water", icon: "🚰" },
-    { name: "Write", icon: "✍️" },
-    { name: "Cleaning", icon: "🧹" },
-    { name: "Study", icon: "📖" },
-    { name: "Brush Teeth", icon: "🦷" },
-    { name: "Take out Trash", icon: "🗑️" },
-    { name: "Grocery Shopping", icon: "🛒" },
-    { name: "Laundry", icon: "🧺" },
-    { name: "Work", icon: "💼" },
-    { name: "Socialize", icon: "👥" },
-    { name: "Relax", icon: "🛋️" },
-    { name: "Hobby", icon: "🎨" },
-    { name: "Volunteer", icon: "🤝" },
-    { name: "Self-Care", icon: "🛀" },
-    { name: "Other", icon: "➕" },
-  ];
+  const isWeekends = frequency === "weekends";
 
   // Spawn a jellyfish
   const spawnJellyfish = () => {
@@ -47,32 +52,29 @@ export default function AddTasks({ user, updateUser }) {
   };
 
   // Handle Add Task
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!taskType.trim()) return;
+    try {
+      await apiCreateTask(
+        token,
+        taskType.trim(),
+        frequency,
+        startTime,
+        isWeekends ? null : anchorDate,
+      );
 
-    updateUser((u) => ({
-      ...u,
-      tasks: [
-        ...u.tasks,
-        {
-          id: Date.now(),
-          type: taskType.trim(),
-          frequency,
-          completedDates: [],
-        },
-      ],
-    }));
+      // Spawn 2-3 jellyfish at once for fun
+      for (let i = 0; i < 2 + Math.floor(Math.random() * 2); i++) {
+        spawnJellyfish();
+      }
 
-    // Spawn 2-3 jellyfish at once for fun
-    for (let i = 0; i < 2 + Math.floor(Math.random() * 2); i++) {
-      spawnJellyfish();
-    }
-
-    setTaskType("");
-    setFrequency("Daily");
-
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 2000);
+      setTaskType("");
+      setFrequency("daily");
+      setStartTime("08:00");
+      setAnchorDate(today());
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 2000);
+    } catch {}
   };
 
   return (
@@ -115,28 +117,50 @@ export default function AddTasks({ user, updateUser }) {
         <div style={styles.field}>
           <label style={styles.label}>Frequency</label>
           <div style={styles.freqGrid}>
-            {freqOptions.map((f) => (
+            {FREQ_OPTIONS.map(({ label, value }) => (
               <button
-                key={f}
+                key={value}
                 style={{
                   ...styles.freqBtn,
-                  ...(frequency === f ? styles.freqBtnActive : {}),
+                  ...(frequency === value ? styles.freqBtnActive : {}),
                 }}
-                onClick={() => setFrequency(f)}
+                onClick={() => setFrequency(value)}
               >
-                {f}
+                {label}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Submit Button */}
+        {/* Start Time */}
+        <div style={styles.field}>
+          <label style={styles.label}>Start Time</label>
+          <input
+            type="time"
+            style={styles.input}
+            value={startTime}
+            onChange={(e) => setStartTime(e.target.value)}
+          />
+        </div>
+
+        {/* Start Day — hidden for weekends (pattern is always Sat + Sun) */}
+        {!isWeekends && (
+          <div style={styles.field}>
+            <label style={styles.label}>Start Day</label>
+            <input
+              type="date"
+              style={styles.input}
+              value={anchorDate}
+              onChange={(e) => setAnchorDate(e.target.value)}
+            />
+          </div>
+        )}
+
         <button style={styles.primaryBtn} onClick={handleSubmit}>
           {submitted ? "🎉 Task Added!" : "Add Task"}
         </button>
       </div>
 
-      {/* Jellyfish Floating */}
       {jellyfishList.map((j) => (
         <img
           key={j.id}
