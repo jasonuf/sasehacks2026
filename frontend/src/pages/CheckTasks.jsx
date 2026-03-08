@@ -122,6 +122,17 @@ const toggleTask = (taskId) => {
               >
                 {done ? "✓ Done" : "Pending"}
               </span>
+              <button
+                style={styles.deleteBtn}
+                onClick={() =>
+                  updateUser((u) => ({
+                    ...u,
+                    tasks: u.tasks.filter((t) => t.id !== task.id),
+                  }))
+                }
+              >
+                ✖ Remove
+              </button>
             </div>
           );
         })}
