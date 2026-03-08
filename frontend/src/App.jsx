@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import LoginScreen from "./components/LoginScreen";
 import Navbar from "./components/Navbar";
@@ -23,10 +23,8 @@ export default function App() {
   const [page, setPage] = useState("check");
   const [loginError, setLoginError] = useState("");
 
-  // Derived state: Get the current user object based on the session
   const currentUser = session ? users[session.username] : null;
 
-  // Sync users to cookies whenever the users state changes
   useEffect(() => {
     setCookie(USERS_KEY, users, 30);
   }, [users]);
@@ -52,39 +50,28 @@ export default function App() {
   const updateCurrentUser = (updater) => {
     setUsers(prev => {
       const updated = { ...prev };
-      // Apply the updater function to the current user's data
       updated[session.username] = updater(updated[session.username]);
       return updated;
     });
   };
 
-  /**
-   * FIX: Wrap friendFailures in useMemo.
-   * This prevents the Banner from "refreshing" or "jumping" 
-   * unless a friend's task actually fails.
-   */
-  const friendFailures = useMemo(() => {
-    if (!currentUser) return [];
+  const friendFailures = currentUser
+    ? currentUser.friends.flatMap(fname => {
+        const friend = users[fname];
+        if (!friend) return [];
+        return friend.tasks
+          .filter(isFailedToday)
+          .map(t => ({ friend: fname, task: t.type }));
+      })
+    : [];
 
-    return currentUser.friends.flatMap(fname => {
-      const friend = users[fname];
-      if (!friend) return [];
-      return friend.tasks
-        .filter(isFailedToday)
-        .map(t => ({ friend: fname, task: t.type }));
-    });
-  }, [users, currentUser]);
-
-  // If no one is logged in, show the login screen
   if (!currentUser) {
     return <LoginScreen onLogin={login} error={loginError} />;
   }
 
   return (
     <div style={styles.app}>
-      {/* The Banner only updates if the memoized failures change */}
       <FailureBanner failures={friendFailures} />
-      
       <Navbar
         page={page}
         setPage={setPage}
