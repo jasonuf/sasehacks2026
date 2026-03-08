@@ -43,6 +43,28 @@ export default function LoginScreen({ onLogin, error }) {
         />
       ))}
     </div>
+        {/* SEAWEED LOWER CORNERS */}
+    <div style={styles.seaweedContainer}>
+      <img
+        src="/images/seaweed.gif"
+        alt="seaweed left"
+        style={{
+          ...styles.seaweed,
+          left: "5%",
+          bottom: 0,
+        }}
+      />
+
+      <img
+        src="https://www.tumblr.com/ggggggggggggggggggggggggggg0/62628996847/d"
+        alt="seaweed right"
+        style={{
+          ...styles.seaweed,
+          right: "5%",
+          bottom: 0,
+        }}
+      />
+    </div>
       <div style={styles.loginCard}>
 
         <div style={styles.loginLogo}>✓</div>
