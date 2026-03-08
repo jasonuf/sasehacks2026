@@ -1,32 +1,26 @@
+import { useState, useEffect } from "react";
 import styles from "../styles/styles";
-import { today } from "../utils/date";
+import { apiGetTasks, apiCheckinTask, apiUncheckinTask, FREQ_LABEL } from "../utils/api";
 
-export default function CheckTasks({ user, updateUser }) {
-  const toggleTask = (taskId) => {
-    updateUser((u) => ({
-      ...u,
-      tasks: u.tasks.map((t) => {
-        if (t.id !== taskId) return t;
+export default function CheckTasks({ token }) {
+  const [tasks, setTasks] = useState([]);
 
-        const done = t.completedDates.includes(today());
+  useEffect(() => {
+    apiGetTasks(token).then(setTasks).catch(() => {});
+  }, [token]);
 
-        return {
-          ...t,
-          completedDates: done
-            ? t.completedDates.filter((d) => d !== today())
-            : [...t.completedDates, today()],
-        };
-      }),
-    }));
+  const toggle = async (taskId, done) => {
+    try {
+      const updated = done
+        ? await apiUncheckinTask(token, taskId)
+        : await apiCheckinTask(token, taskId);
+      setTasks((prev) => prev.map((t) => (t.id === taskId ? updated : t)));
+    } catch {}
   };
 
-  const pct = user.tasks.length
+  const pct = tasks.length
     ? Math.round(
-        (user.tasks.filter((t) =>
-          t.completedDates.includes(today())
-        ).length /
-          user.tasks.length) *
-          100
+        (tasks.filter((t) => !t.is_overdue).length / tasks.length) * 100
       )
     : 0;
 
@@ -41,20 +35,16 @@ export default function CheckTasks({ user, updateUser }) {
             width: `${pct}%`,
           }}
         />
-        <span style={styles.progressLabel}>
-          {pct}% complete
-        </span>
+        <span style={styles.progressLabel}>{pct}% complete</span>
       </div>
 
-      {user.tasks.length === 0 && (
-        <div style={styles.empty}>
-          No tasks yet — add some!
-        </div>
+      {tasks.length === 0 && (
+        <div style={styles.empty}>No tasks yet — add some!</div>
       )}
 
       <div style={styles.taskList}>
-        {user.tasks.map((task) => {
-          const done = task.completedDates.includes(today());
+        {tasks.map((task) => {
+          const done = !task.is_overdue;
 
           return (
             <div
@@ -68,7 +58,7 @@ export default function CheckTasks({ user, updateUser }) {
                 <input
                   type="checkbox"
                   checked={done}
-                  onChange={() => toggleTask(task.id)}
+                  onChange={() => toggle(task.id, done)}
                   style={styles.checkbox}
                 />
 
@@ -79,11 +69,12 @@ export default function CheckTasks({ user, updateUser }) {
                       ...(done ? styles.taskNameDone : {}),
                     }}
                   >
-                    {task.type}
+                    {task.title}
                   </span>
 
                   <span style={styles.taskFreq}>
-                    {task.frequency}
+                    {FREQ_LABEL[task.frequency] ?? task.frequency}
+                    {task.start_time ? ` · ${task.start_time}` : ""}
                   </span>
                 </div>
               </label>
