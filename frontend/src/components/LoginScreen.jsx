@@ -48,7 +48,7 @@ export default function LoginScreen({ onLogin, error }) {
       bottom: 0,
       left: 0,
       right: 0,
-      height: "200px", // Let the children position themselves relative to the very bottom
+      height: "250px", // Let the children position themselves relative to the very bottom
       pointerEvents: "none",
       zIndex: 3, // Higher than the waveContainer (which is zIndex 1)
     }}>
@@ -59,7 +59,7 @@ export default function LoginScreen({ onLogin, error }) {
           ...styles.seaweed,
           left: "5%", 
           bottom: "0", // Pushes the base slightly off-screen for a "planted" look
-          width: "200px",  // Enlarged size
+          width: "230px",  // Enlarged size
           height: "auto",
         }}
       />
@@ -71,7 +71,7 @@ export default function LoginScreen({ onLogin, error }) {
           ...styles.seaweed,
           right: "5%",
           bottom: "0", 
-          width: "200px", // Enlarged size
+          width: "230", // Enlarged size
           height: "auto",
           transform: "scaleX(-1)", // Optional: Flips the image so it's not a mirror image
         }}
