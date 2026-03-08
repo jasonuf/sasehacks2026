@@ -43,12 +43,14 @@ export default function LoginScreen({ onLogin, error }) {
         />
       ))}
     </div>
+
     <div style={{
       position: "fixed", 
       bottom: 0,
       left: 0,
       right: 0,
       height: "300px", 
+      width: "100%",
       pointerEvents: "none",
       zIndex: 3, 
     }}>
@@ -57,7 +59,8 @@ export default function LoginScreen({ onLogin, error }) {
         alt="seaweed left"
         style={{
           ...styles.seaweed,
-          left: "5%", 
+          position: "absolute",
+          left: "0", 
           bottom: "0", // Pushes the base slightly off-screen for a "planted" look
           width: "300px",  // Enlarged size
           height: "auto",
@@ -69,9 +72,10 @@ export default function LoginScreen({ onLogin, error }) {
         alt="seaweed right"
         style={{
           ...styles.seaweed,
-          right: "5%",
+          position: "absolute",
+          right: "0",
           bottom: "0", 
-          width: "300p", // Enlarged size
+          width: "300px", // Enlarged size
           height: "auto",
           transform: "scaleX(-1)", // Optional: Flips the image so it's not a mirror image
         }}
