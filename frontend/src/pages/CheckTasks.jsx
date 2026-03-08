@@ -2,20 +2,44 @@ import styles from "../styles/styles";
 import { today } from "../utils/date";
 
 export default function CheckTasks({ user, updateUser }) {
-  const toggleTask = (taskId) => {
-    updateUser((u) => {
-      const newTasks = u.tasks.map((t) => {
-        if (t.id !== taskId) return t;
+const toggleTask = (taskId) => {
+  updateUser((u) => {
+    const newTasks = u.tasks.map((t) => {
+      if (t.id !== taskId) return t;
 
-        const done = t.completedDates.includes(today());
+      const done = t.completedDates.includes(today());
 
-        return {
-          ...t,
-          completedDates: done
-            ? t.completedDates.filter((d) => d !== today())
-            : [...t.completedDates, today()],
-        };
-      });
+      return {
+        ...t,
+        completedDates: done
+          ? t.completedDates.filter((d) => d !== today())
+          : [...t.completedDates, today()],
+      };
+    });
+
+    // 🔥 Check if ALL tasks are complete today
+    const allCompleted =
+      newTasks.length > 0 &&
+      newTasks.every((t) => t.completedDates.includes(today()));
+
+    let streak = u.streak || 0;
+    let last = u.lastStreakDate;
+
+    // Only increase streak if all tasks are done AND not counted today yet
+    if (allCompleted && last !== today()) {
+      streak += 1;
+      last = today();
+    }
+
+    // If tasks are NOT all complete today, do NOT increase streak
+    return {
+      ...u,
+      tasks: newTasks,
+      streak,
+      lastStreakDate: last,
+    };
+  });
+};
 
       // 🔥 Streak logic
       const allCompleted =
