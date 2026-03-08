@@ -11,6 +11,38 @@ export default function LoginScreen({ onLogin, error }) {
 
   return (
     <div style={styles.loginBg}>
+      <style>
+        {`
+          @keyframes rise {
+            0% { transform: translateY(0); opacity: 0.6; }
+            100% { transform: translateY(-1000px); opacity: 0; }
+          }
+        `}
+      </style>
+
+    <div style={styles.bubbleContainer}>
+      {Array.from({ length: 12 }).map((_, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            bottom: "-120px",
+            left: `${Math.random() * 100}%`,
+            width: `${25 + Math.random() * 40}px`,
+            height: `${25 + Math.random() * 40}px`,
+            background: "rgba(206, 228, 239, 0.9)",
+            borderRadius: "50%",
+            animationName: "rise",
+            animationDuration: `${5 + Math.random() * 6}s`,
+            animationTimingFunction: "ease-in",
+            animationIterationCount: "infinite",
+            pointerEvents: "none",
+            // Adding a random delay so they don't all start at once
+            animationDelay: `${Math.random() * 5}s`, 
+          }}
+        />
+      ))}
+    </div>
       <div style={styles.loginCard}>
 
         <div style={styles.loginLogo}>✓</div>
