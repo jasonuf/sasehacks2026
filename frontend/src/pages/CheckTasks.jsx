@@ -3,9 +3,8 @@ import { today } from "../utils/date";
 
 export default function CheckTasks({ user, updateUser }) {
   const toggleTask = (taskId) => {
-    updateUser((u) => ({
-      ...u,
-      tasks: u.tasks.map((t) => {
+    updateUser((u) => {
+      const newTasks = u.tasks.map((t) => {
         if (t.id !== taskId) return t;
 
         const done = t.completedDates.includes(today());
@@ -16,8 +15,28 @@ export default function CheckTasks({ user, updateUser }) {
             ? t.completedDates.filter((d) => d !== today())
             : [...t.completedDates, today()],
         };
-      }),
-    }));
+      });
+
+      // 🔥 Streak logic
+      const allCompleted =
+        newTasks.length > 0 &&
+        newTasks.every((t) => t.completedDates.includes(today()));
+
+      let streak = u.streak || 0;
+      let last = u.lastStreakDate;
+
+      if (allCompleted && last !== today()) {
+        streak += 1;
+        last = today();
+      }
+
+      return {
+        ...u,
+        tasks: newTasks,
+        streak,
+        lastStreakDate: last,
+      };
+    });
   };
 
   const pct = user.tasks.length
@@ -33,6 +52,11 @@ export default function CheckTasks({ user, updateUser }) {
   return (
     <div style={styles.section}>
       <h2 style={styles.sectionTitle}>Today's Tasks</h2>
+
+      {/* 🔥 Streak Box */}
+      <div style={styles.streakBox}>
+        🔥 Streak: {user.streak || 0} days
+      </div>
 
       <div style={styles.progressBar}>
         <div

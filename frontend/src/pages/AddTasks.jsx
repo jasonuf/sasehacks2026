@@ -5,36 +5,52 @@ export default function AddTasks({ user, updateUser }) {
   const [taskType, setTaskType] = useState("");
   const [frequency, setFrequency] = useState("Daily");
   const [submitted, setSubmitted] = useState(false);
+  const [jellyfishList, setJellyfishList] = useState([]);
 
   const freqOptions = ["Daily", "Weekly", "3x/week", "Weekdays", "Custom"];
-  
+
   const commonTasks = [
-    { name: "Exercise", icon: "🏋️" },{ name: "Read", icon: "📚" },{ name: "Meditate", icon: "🧘" },
-    { name: "Cook", icon: "🍳" },{ name: "Sleep", icon: "😴" },{ name: "Shower", icon: "🚿" },
-    { name: "Drink Water", icon: "🚰" },{ name: "Write", icon: "✍️" },{ name: "Cleaning", icon: "🧹" },
-    { name: "Study", icon: "📖"},{name: "Brush Teeth", icon: "🦷"},{name: "Take out Trash", icon: "🗑️"},
-    { name: "Grocery Shopping", icon: "🛒"},{name: "Laundry", icon: "🧺"},{name: "Work", icon: "💼"},
-    { name: "Socialize", icon: "👥"},{name: "Relax", icon: "🛋️"},{name: "Hobby", icon: "🎨"},
-    { name: "Volunteer", icon: "🤝" },{ name: "Self-Care", icon: "🛀" }, {name: "Other", icon: "➕"},
+    { name: "Exercise", icon: "🏋️" },
+    { name: "Read", icon: "📚" },
+    { name: "Meditate", icon: "🧘" },
+    { name: "Cook", icon: "🍳" },
+    { name: "Sleep", icon: "😴" },
+    { name: "Shower", icon: "🚿" },
+    { name: "Drink Water", icon: "🚰" },
+    { name: "Write", icon: "✍️" },
+    { name: "Cleaning", icon: "🧹" },
+    { name: "Study", icon: "📖" },
+    { name: "Brush Teeth", icon: "🦷" },
+    { name: "Take out Trash", icon: "🗑️" },
+    { name: "Grocery Shopping", icon: "🛒" },
+    { name: "Laundry", icon: "🧺" },
+    { name: "Work", icon: "💼" },
+    { name: "Socialize", icon: "👥" },
+    { name: "Relax", icon: "🛋️" },
+    { name: "Hobby", icon: "🎨" },
+    { name: "Volunteer", icon: "🤝" },
+    { name: "Self-Care", icon: "🛀" },
+    { name: "Other", icon: "➕" },
   ];
-  const [jellyfishList, setJellyfishList] = useState([]);
+
+  // Spawn a jellyfish
   const spawnJellyfish = () => {
-    const id = Date.now() + Math.random(); // unique ID
-    const top = 20 + Math.random() * 50; // random vertical position
-    const size = 50 + Math.random() * 40; // random size
+    const id = Date.now() + Math.random();
+    const top = 20 + Math.random() * 50;
+    const size = 50 + Math.random() * 40;
 
-    setJellyfishList(prev => [...prev, { id, top, size }]);
+    setJellyfishList((prev) => [...prev, { id, top, size }]);
 
-    // remove after 6s (animation duration)
     setTimeout(() => {
-      setJellyfishList(prev => prev.filter(j => j.id !== id));
-    }, 6000);
+      setJellyfishList((prev) => prev.filter((j) => j.id !== id));
+    }, 6000); // matches animation duration
   };
 
+  // Handle Add Task
   const handleSubmit = () => {
     if (!taskType.trim()) return;
 
-    updateUser(u => ({
+    updateUser((u) => ({
       ...u,
       tasks: [
         ...u.tasks,
@@ -47,7 +63,10 @@ export default function AddTasks({ user, updateUser }) {
       ],
     }));
 
-    spawnJellyfish(); 
+    // Spawn 2-3 jellyfish at once for fun
+    for (let i = 0; i < 2 + Math.floor(Math.random() * 2); i++) {
+      spawnJellyfish();
+    }
 
     setTaskType("");
     setFrequency("Daily");
@@ -62,6 +81,7 @@ export default function AddTasks({ user, updateUser }) {
       <p style={styles.sectionDesc}>Choose a habit or create your own.</p>
 
       <div style={styles.card}>
+        {/* Task Buttons */}
         <div style={styles.taskGrid}>
           {commonTasks.map((task) => (
             <button
@@ -70,9 +90,7 @@ export default function AddTasks({ user, updateUser }) {
                 ...styles.taskBtn,
                 ...(taskType === task.name ? styles.taskBtnActive : {}),
               }}
-              onClick={() =>
-                setTaskType(task.name === "Other" ? "" : task.name)
-              }
+              onClick={() => setTaskType(task.name === "Other" ? "" : task.name)}
             >
               <div style={{ fontSize: "20px" }}>{task.icon}</div>
               <div>{task.name}</div>
@@ -80,6 +98,7 @@ export default function AddTasks({ user, updateUser }) {
           ))}
         </div>
 
+        {/* Custom Task Input */}
         {taskType === "" && (
           <div style={styles.field}>
             <label style={styles.label}>Custom Task</label>
@@ -92,6 +111,7 @@ export default function AddTasks({ user, updateUser }) {
           </div>
         )}
 
+        {/* Frequency Buttons */}
         <div style={styles.field}>
           <label style={styles.label}>Frequency</label>
           <div style={styles.freqGrid}>
@@ -112,7 +132,7 @@ export default function AddTasks({ user, updateUser }) {
 
         {/* Submit Button */}
         <button style={styles.primaryBtn} onClick={handleSubmit}>
-          {submitted ? "🎉 Task Added!" : "Add Task "}
+          {submitted ? "🎉 Task Added!" : "Add Task"}
         </button>
       </div>
 
