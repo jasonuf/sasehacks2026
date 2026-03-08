@@ -18,18 +18,30 @@ const styles = {
     padding: 20,
   },
 
+    bubbleContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    overflow: "hidden",
+    zIndex: 2,
+    pointerEvents: "none",
+  },
+    
+
   loginCard: {
     background: "#547792", //login background
-    border: "1px solid #547792",
-    borderRadius: 16,
-    padding: "48px 40px",
-    width: "100%",
-    maxWidth: 400,
+  border: "1px solid #547792",
+  borderRadius: 16,
+  padding: "48px 40px",
+  width: "100%",
+  maxWidth: 400,
     boxShadow: "0 0 60px #56707b",
-    position: "relative",
+  position: "relative",
     zIndex: 2
 
-  },
+},
 
   loginLogo: {
     fontSize: 40,
