@@ -30,7 +30,7 @@ export default function LoginScreen({ onLogin, error }) {
             left: `${Math.random() * 100}%`,
             width: `${25 + Math.random() * 40}px`,
             height: `${25 + Math.random() * 40}px`,
-            background: "rgba(255, 255, 255, 0.9)",
+            background: "rgba(206, 228, 239, 0.9)",
             borderRadius: "50%",
             animationName: "rise",
             animationDuration: `${5 + Math.random() * 6}s`,
