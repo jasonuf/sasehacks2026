@@ -129,7 +129,7 @@ loginBg: {
 
   // Navbar
   nav: {
-    background: "#11111b",
+    background: "#141310",
     borderBottom: "1px solid #1e1e2e",
     padding: "0 24px",
     display: "flex",
@@ -144,7 +144,7 @@ loginBg: {
   navBrand: {
     fontWeight: 800,
     fontSize: 16,
-    color: "#82b8f5",
+    color: "#547792",
     letterSpacing: "0.08em",
     marginRight: 16,
   },
@@ -158,7 +158,7 @@ loginBg: {
   navTab: {
     background: "transparent",
     border: "none",
-    color: "#6b7280",
+    color: "#EFECE3",
     padding: "6px 14px",
     borderRadius: 6,
     cursor: "pointer",
@@ -168,8 +168,8 @@ loginBg: {
   },
 
   navTabActive: {
-    background: "#1e1e2e",
-    color: "#a78bfa",
+    background: "#EFECE3",
+    color: "#EFECE3",
   },
 
   navRight: {
@@ -217,7 +217,7 @@ loginBg: {
   },
 
   card: {
-    background: "#2c2131",
+    background: "#bcacc3",
     border: "1px solid #1e1e2e",
     borderRadius: 12,
     padding: 24,
