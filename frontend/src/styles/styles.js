@@ -169,7 +169,7 @@ loginBg: {
   navBrand: {
     fontWeight: 800,
     fontSize: 16,
-    color: "#82b8f5",
+    color: "#000000",
     letterSpacing: "0.08em",
     marginRight: 16,
   },
@@ -193,8 +193,8 @@ loginBg: {
   },
 
   navTabActive: {
-    background: "#1e1e2e",
-    color: "#a78bfa",
+    background: "#EFECE3",
+    color: "#000000",
   },
 
   navRight: {
@@ -211,7 +211,7 @@ loginBg: {
   logoutBtn: {
     background: "#EFECE3",
     border: "1px solid #2a2a3e",
-    color: "#ffffff",
+    color: "#000000",
     padding: "4px 12px",
     borderRadius: 6,
     cursor: "pointer",
@@ -230,7 +230,7 @@ loginBg: {
   sectionTitle: {
     fontSize: 22,
     fontWeight: 800,
-    color: "#f1f5f9",
+    color: "#000000",
     marginBottom: 4,
     letterSpacing: "0.03em",
   },
@@ -325,7 +325,7 @@ loginBg: {
   checkbox: {
     width: 18,
     height: 18,
-    accentColor: "#a78bfa",
+    accentColor: "#8bfab4",
   },
 
   taskName: {
