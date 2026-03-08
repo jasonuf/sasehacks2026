@@ -17,33 +17,23 @@ export default function AddTasks({ user, updateUser }) {
     { name: "Socialize", icon: "👥"},{name: "Relax", icon: "🛋️"},{name: "Hobby", icon: "🎨"},
     { name: "Volunteer", icon: "🤝" },{ name: "Self-Care", icon: "🛀" }, {name: "Other", icon: "➕"},
   ];
-const spawnJellyfish = () => {
-  const jelly = document.createElement("img");
+  const spawnJellyfish = () => {
+    const id = Date.now() + Math.random(); // unique ID
+    const top = 20 + Math.random() * 50; // random vertical position
+    const size = 50 + Math.random() * 40; // random size
 
-  jelly.src = "jellyfish-removebg-preview.png";
-  jelly.style.position = "fixed";
+    setJellyfishList(prev => [...prev, { id, top, size }]);
 
-  jelly.style.top = `${20 + Math.random() * 50}%`;
-
-  jelly.style.left = "-120px";
-  jelly.style.width = "70px";
-  jelly.style.height = "auto";
-  jelly.style.pointerEvents = "none";
-  jelly.style.animation = "jellyAcross 6s linear forwards";
-  jelly.style.filter = "drop-shadow(0 0 8px rgba(173,216,230,0.9))";
-  jelly.style.zIndex = "999";
-
-  document.body.appendChild(jelly);
-
-  setTimeout(() => {
-    jelly.remove();
-  }, 6000);
-};
+    // remove after 6s (animation duration)
+    setTimeout(() => {
+      setJellyfishList(prev => prev.filter(j => j.id !== id));
+    }, 6000);
+  };
 
   const handleSubmit = () => {
     if (!taskType.trim()) return;
 
-    updateUser((u) => ({
+    updateUser(u => ({
       ...u,
       tasks: [
         ...u.tasks,
@@ -66,12 +56,11 @@ const spawnJellyfish = () => {
   };
 
   return (
-   <div style={styles.section}>
+    <div style={styles.section}>
       <h2 style={styles.sectionTitle}>Add a Task</h2>
       <p style={styles.sectionDesc}>Choose a habit or create your own.</p>
 
       <div style={styles.card}>
-
         <div style={styles.taskGrid}>
           {commonTasks.map((task) => (
             <button
@@ -104,7 +93,6 @@ const spawnJellyfish = () => {
 
         <div style={styles.field}>
           <label style={styles.label}>Frequency</label>
-
           <div style={styles.freqGrid}>
             {freqOptions.map((f) => (
               <button
@@ -121,10 +109,31 @@ const spawnJellyfish = () => {
           </div>
         </div>
 
+        {/* Submit Button */}
         <button style={styles.primaryBtn} onClick={handleSubmit}>
           {submitted ? "🎉 Task Added!" : "Add Task "}
         </button>
       </div>
+
+      {/* Jellyfish Floating */}
+      {jellyfishList.map((j) => (
+        <img
+          key={j.id}
+          src="jellyfish-removebg-preview.png"
+          alt="jellyfish"
+          style={{
+            position: "fixed",
+            top: `${j.top}%`,
+            left: "-120px",
+            width: `${j.size}px`,
+            height: "auto",
+            pointerEvents: "none",
+            zIndex: 999,
+            filter: "drop-shadow(0 0 12px rgba(173,216,230,0.9))",
+            animation: "jellyAcross 6s linear forwards",
+          }}
+        />
+      ))}
     </div>
   );
 }
