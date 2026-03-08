@@ -53,7 +53,7 @@ export default function LoginScreen({ onLogin, error }) {
           left: "5%",
           bottom: 0,
           witdh: 120,
-          transformOrigin: "bottom left",
+          transformOrigin: "bottom center",
         }}
       />
 
@@ -65,7 +65,7 @@ export default function LoginScreen({ onLogin, error }) {
           right: "5%",
           bottom: 0,
           width: 120,
-          transformOrigin: "bottom right",
+          transformOrigin: "bottom center",
         }}
       />
     </div>
