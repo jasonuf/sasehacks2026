@@ -2,31 +2,31 @@ import { useState } from "react";
 import styles from "../styles/styles";
 import { apiCreateTask, FREQ_OPTIONS } from "../utils/api";
 
-const today = () => new Date().toISOString().slice(0, 10);
+  const today = () => new Date().toISOString().slice(0, 10);
 
-const commonTasks = [
-  { name: "Exercise", icon: "🏋️" },
-  { name: "Read", icon: "📚" },
-  { name: "Meditate", icon: "🧘" },
-  { name: "Cook", icon: "🍳" },
-  { name: "Sleep", icon: "😴" },
-  { name: "Shower", icon: "🚿" },
-  { name: "Drink Water", icon: "🚰" },
-  { name: "Write", icon: "✍️" },
-  { name: "Cleaning", icon: "🧹" },
-  { name: "Study", icon: "📖" },
-  { name: "Brush Teeth", icon: "🦷" },
-  { name: "Take out Trash", icon: "🗑️" },
-  { name: "Grocery Shopping", icon: "🛒" },
-  { name: "Laundry", icon: "🧺" },
-  { name: "Work", icon: "💼" },
-  { name: "Socialize", icon: "👥" },
-  { name: "Relax", icon: "🛋️" },
-  { name: "Hobby", icon: "🎨" },
-  { name: "Volunteer", icon: "🤝" },
-  { name: "Self-Care", icon: "🛀" },
-  { name: "Other", icon: "➕" },
-];
+  const commonTasks = [
+    { name: "Exercise", icon: "🏋️" },
+    { name: "Read", icon: "📚" },
+    { name: "Meditate", icon: "🧘" },
+    { name: "Cook", icon: "🍳" },
+    { name: "Sleep", icon: "😴" },
+    { name: "Shower", icon: "🚿" },
+    { name: "Drink Water", icon: "🚰" },
+    { name: "Write", icon: "✍️" },
+    { name: "Cleaning", icon: "🧹" },
+    { name: "Study", icon: "📖" },
+    { name: "Brush Teeth", icon: "🦷" },
+    { name: "Take out Trash", icon: "🗑️" },
+    { name: "Grocery Shopping", icon: "🛒" },
+    { name: "Laundry", icon: "🧺" },
+    { name: "Work", icon: "💼" },
+    { name: "Socialize", icon: "👥" },
+    { name: "Relax", icon: "🛋️" },
+    { name: "Hobby", icon: "🎨" },
+    { name: "Volunteer", icon: "🤝" },
+    { name: "Self-Care", icon: "🛀" },
+    { name: "Other", icon: "➕" },
+  ];
 
 export default function AddTasks({ token }) {
   const [taskType, setTaskType] = useState("");
@@ -54,36 +54,36 @@ export default function AddTasks({ token }) {
   // Handle Add Task
   const handleSubmit = async () => {
     if (!taskType.trim()) return;
-    try {
+try {
       await apiCreateTask(
         token,
-        taskType.trim(),
-        frequency,
-        startTime,
+taskType.trim(),
+          frequency,
+          startTime,
         isWeekends ? null : anchorDate,
-      );
+);
 
-      // Spawn 2-3 jellyfish at once for fun
-      for (let i = 0; i < 2 + Math.floor(Math.random() * 2); i++) {
-        spawnJellyfish();
-      }
+    // Spawn 2-3 jellyfish at once for fun
+    for (let i = 0; i < 2 + Math.floor(Math.random() * 2); i++) {
+      spawnJellyfish();
+    }
 
-      setTaskType("");
-      setFrequency("daily");
-      setStartTime("08:00");
+    setTaskType("");
+    setFrequency("daily");
+setStartTime("08:00");
       setAnchorDate(today());
-      setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 2000);
-    } catch {}
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 2000);
+} catch {}
   };
 
   return (
     <div style={styles.section}>
-      <h2 style={styles.sectionTitle}>Add a Task</h2>
+            <h2 style={styles.sectionTitle}>Add a Task</h2>
       <p style={styles.sectionDesc}>Choose a habit or create your own.</p>
 
       <div style={styles.card}>
-        {/* Task Buttons */}
+{/* Task Buttons */}
         <div style={styles.taskGrid}>
           {commonTasks.map((task) => (
             <button
@@ -113,7 +113,7 @@ export default function AddTasks({ token }) {
           </div>
         )}
 
-        {/* Frequency Buttons */}
+{/* Frequency Buttons */}
         <div style={styles.field}>
           <label style={styles.label}>Frequency</label>
           <div style={styles.freqGrid}>
@@ -161,7 +161,7 @@ export default function AddTasks({ token }) {
         </button>
       </div>
 
-      {jellyfishList.map((j) => (
+            {jellyfishList.map((j) => (
         <img
           key={j.id}
           src="/jellyfish-removebg-preview.png"

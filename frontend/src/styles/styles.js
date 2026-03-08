@@ -327,6 +327,26 @@ loginBg: {
     height: 18,
     accentColor: "#8bfab4",
   },
+  streakBox: {
+  background: "#14532d",
+  color: "#4ade80",
+  padding: "8px 14px",
+  borderRadius: 8,
+  fontWeight: 700,
+  marginBottom: 12,
+  display: "inline-block",
+  },
+  
+  deleteBtn: {
+    background: "#450a0a",
+    color: "#f87171",
+    border: "none",
+    borderRadius: 6,
+    padding: "4px 8px",
+    cursor: "pointer",
+    fontSize: 11,
+  },
+
 
   taskName: {
     display: "block",

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import "./App.css";
+
 import LoginScreen from "./components/LoginScreen";
 import RegisterScreen from "./components/RegisterScreen";
 import Navbar from "./components/Navbar";
@@ -20,93 +21,115 @@ export default function App() {
   const [session, setSession] = useState(() => getCookie(SESSION_KEY));
   const [authPage, setAuthPage] = useState("login");
   const [page, setPage] = useState("check");
+
   const [loginError, setLoginError] = useState("");
   const [registerError, setRegisterError] = useState("");
-  const [friendFailures, setFriendFailures] = useState([]);
 
-  // 🟢 NEW: user state
-  const [user, setUser] = useState({
-    tasks: [],
-    streak: 0,
-    lastStreakDate: null,
-  });
+  const [friendFailures, setFriendFailures] = useState([]);
 
   const token = session?.token;
   const username = session?.username;
 
+  // Load friend failures
   const loadFriendsMissed = useCallback(async () => {
     if (!token) return;
+
     try {
       const missed = await apiGetFriendsMissed(token);
+
       const failures = missed.flatMap((f) =>
-        f.missed_tasks.map((t) => ({ friend: f.friend_username, task: t.title }))
+        f.missed_tasks.map((t) => ({
+          friend: f.friend_username,
+          task: t.title,
+        }))
       );
+
       setFriendFailures(failures);
-    } catch {}
+    } catch {
+      console.log("Failed to load friend failures");
+    }
   }, [token]);
 
   useEffect(() => {
     loadFriendsMissed();
   }, [loadFriendsMissed]);
 
+  // LOGIN
   const login = async (email, password) => {
     try {
       const data = await apiLogin(email, password);
-      const sess = { token: data.access_token, username: email };
+
+      const sess = {
+        token: data.access_token,
+        username: email,
+      };
+
       setCookie(SESSION_KEY, sess);
       setSession(sess);
       setLoginError("");
-
-      // initialize user on login
-      setUser({ tasks: [], streak: 0, lastStreakDate: null });
     } catch {
       setLoginError("Invalid email or password.");
     }
   };
 
+  // REGISTER
   const register = async (email, username, password) => {
     try {
       await apiRegister(email, username, password);
+
       const data = await apiLogin(email, password);
-      const sess = { token: data.access_token, username };
+
+      const sess = {
+        token: data.access_token,
+        username,
+      };
+
       setCookie(SESSION_KEY, sess);
       setSession(sess);
       setRegisterError("");
-
-      setUser({ tasks: [], streak: 0, lastStreakDate: null });
     } catch (err) {
       setRegisterError(err.message || "Registration failed.");
     }
   };
 
+  // LOGOUT
   const logout = () => {
     deleteCookie(SESSION_KEY);
     setSession(null);
-    setUser({ tasks: [], streak: 0, lastStreakDate: null });
   };
 
+  // AUTH SCREENS
   if (!session) {
     if (authPage === "register") {
       return (
         <RegisterScreen
           onRegister={register}
-          onSwitchToLogin={() => { setRegisterError(""); setAuthPage("login"); }}
+          onSwitchToLogin={() => {
+            setRegisterError("");
+            setAuthPage("login");
+          }}
           error={registerError}
         />
       );
     }
+
     return (
       <LoginScreen
         onLogin={login}
-        onSwitchToRegister={() => { setLoginError(""); setAuthPage("register"); }}
+        onSwitchToRegister={() => {
+          setLoginError("");
+          setAuthPage("register");
+        }}
         error={loginError}
       />
     );
   }
 
+  // MAIN APP
   return (
     <div style={styles.app}>
       <FailureBanner failures={friendFailures} />
+
       <Navbar
         page={page}
         setPage={setPage}
@@ -115,13 +138,9 @@ export default function App() {
       />
 
       <main style={styles.main}>
-        {page === "add" && (
-          <AddTasks user={user} updateUser={setUser} />
-        )}
+        {page === "add" && <AddTasks token={token} />}
 
-        {page === "check" && (
-          <CheckTasks user={user} updateUser={setUser} />
-        )}
+        {page === "check" && <CheckTasks token={token} />}
 
         {page === "friends" && (
           <Friends token={token} onFriendsChange={loadFriendsMissed} />
