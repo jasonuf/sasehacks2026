@@ -183,7 +183,7 @@ loginBg: {
   navTab: {
     background: "transparent",
     border: "none",
-    color: "#6b7280",
+    color: "#000000",
     padding: "6px 14px",
     borderRadius: 6,
     cursor: "pointer",
