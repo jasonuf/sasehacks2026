@@ -169,7 +169,7 @@ loginBg: {
   navBrand: {
     fontWeight: 800,
     fontSize: 16,
-    color: "#82b8f5",
+    color: "#000000",
     letterSpacing: "0.08em",
     marginRight: 16,
   },
@@ -183,7 +183,7 @@ loginBg: {
   navTab: {
     background: "transparent",
     border: "none",
-    color: "#0000",
+    color: "#000000",
     padding: "6px 14px",
     borderRadius: 6,
     cursor: "pointer",
@@ -193,8 +193,8 @@ loginBg: {
   },
 
   navTabActive: {
-    background: "#1e1e2e",
-    color: "#a78bfa",
+    background: "#EFECE3",
+    color: "#000000",
   },
 
   navRight: {
@@ -205,13 +205,13 @@ loginBg: {
 
   navUser: {
     fontSize: 12,
-    color: "#4b5563",
+    color: "#010101",
   },
 
   logoutBtn: {
-    background: "transparent",
-    border: "1px solid #2a2a3e",
-    color: "#6b7280",
+    background: "#EFECE3",
+    border: "1px solid #060606",
+    color: "#000000",
     padding: "4px 12px",
     borderRadius: 6,
     cursor: "pointer",
@@ -230,7 +230,7 @@ loginBg: {
   sectionTitle: {
     fontSize: 22,
     fontWeight: 800,
-    color: "#f1f5f9",
+    color: "#000000",
     marginBottom: 4,
     letterSpacing: "0.03em",
   },
@@ -325,13 +325,34 @@ loginBg: {
   checkbox: {
     width: 18,
     height: 18,
-    accentColor: "#a78bfa",
+    accentColor: "#8bfab4",
   },
+  streakBox: {
+  background: "#14532d",
+  color: "#4ade80",
+  padding: "8px 14px",
+  borderRadius: 8,
+  fontWeight: 700,
+  marginBottom: 12,
+  display: "inline-block",
+  },
+  
+  deleteBtn: {
+    background: "#450a0a",
+    color: "#f87171",
+    border: "none",
+    borderRadius: 6,
+    padding: "4px 8px",
+    cursor: "pointer",
+    fontSize: 11,
+  },
+
 
   taskName: {
     display: "block",
     fontSize: 15,
     fontWeight: 600,
+    color: "#FFFFFF",
   },
 
   taskNameDone: {
@@ -341,7 +362,7 @@ loginBg: {
 
   taskFreq: {
     fontSize: 11,
-    color: "#4b5563",
+    color: "#FFFFFF",
     marginTop: 2,
     display: "block",
   },
@@ -349,6 +370,7 @@ loginBg: {
   taskStatus: {
     fontSize: 12,
     fontWeight: 700,
+    color: "#FFFFFF",
   },
 
   empty: {

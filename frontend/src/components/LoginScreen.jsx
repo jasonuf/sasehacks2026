@@ -1,12 +1,12 @@
 import { useState } from "react";
 import styles from "../styles/styles";
 
-export default function LoginScreen({ onLogin, error }) {
-  const [username, setUsername] = useState("");
+export default function LoginScreen({ onLogin, onSwitchToRegister, error }) {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    onLogin(username, password);
+    onLogin(email, password);
   };
 
   return (
@@ -90,11 +90,12 @@ export default function LoginScreen({ onLogin, error }) {
         <p style={styles.loginSub}>Hold each other to it.</p>
 
         <div style={styles.field}>
-          <label style={styles.label}>Username</label>
+          <label style={styles.label}>Email</label>
           <input
             style={styles.input}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleLogin()}
             autoFocus
           />
@@ -121,8 +122,8 @@ export default function LoginScreen({ onLogin, error }) {
           Sign In
         </button>
 
-        <p style={styles.hint}>
-          Try: alice / pass · bob / pass
+        <p style={{ ...styles.hint, cursor: "pointer" }} onClick={onSwitchToRegister}>
+          No account? <span style={{ textDecoration: "underline" }}>Register</span>
         </p>
       </div>
        {/* WAVE GOES HERE */}

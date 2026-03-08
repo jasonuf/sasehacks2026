@@ -1,11 +1,10 @@
 import styles from "../styles/styles";
 import { today } from "../utils/date";
 
-export default function CheckTasks({ user, updateUser }) {
+export default function CheckTasks({ user = { tasks: [] }, updateUser }) {
   const toggleTask = (taskId) => {
-    updateUser((u) => ({
-      ...u,
-      tasks: u.tasks.map((t) => {
+    updateUser((u) => {
+      const newTasks = u.tasks.map((t) => {
         if (t.id !== taskId) return t;
 
         const done = t.completedDates.includes(today());
@@ -16,7 +15,34 @@ export default function CheckTasks({ user, updateUser }) {
             ? t.completedDates.filter((d) => d !== today())
             : [...t.completedDates, today()],
         };
-      }),
+      });
+
+      // 🔥 streak logic: only increase if ALL tasks are complete
+      const allCompleted =
+        newTasks.length > 0 &&
+        newTasks.every((t) => t.completedDates.includes(today()));
+
+      let streak = u.streak || 0;
+      let last = u.lastStreakDate;
+
+      if (allCompleted && last !== today()) {
+        streak += 1;
+        last = today();
+      }
+
+      return {
+        ...u,
+        tasks: newTasks,
+        streak,
+        lastStreakDate: last,
+      };
+    });
+  };
+
+  const deleteTask = (taskId) => {
+    updateUser((u) => ({
+      ...u,
+      tasks: u.tasks.filter((t) => t.id !== taskId),
     }));
   };
 
@@ -34,6 +60,11 @@ export default function CheckTasks({ user, updateUser }) {
     <div style={styles.section}>
       <h2 style={styles.sectionTitle}>Today's Tasks</h2>
 
+      {/* streak box */}
+      <div style={styles.streakBox}>
+        🔥 Streak: {user.streak || 0} days
+      </div>
+
       <div style={styles.progressBar}>
         <div
           style={{
@@ -41,15 +72,11 @@ export default function CheckTasks({ user, updateUser }) {
             width: `${pct}%`,
           }}
         />
-        <span style={styles.progressLabel}>
-          {pct}% complete
-        </span>
+        <span style={styles.progressLabel}>{pct}% complete</span>
       </div>
 
       {user.tasks.length === 0 && (
-        <div style={styles.empty}>
-          No tasks yet — add some!
-        </div>
+        <div style={styles.empty}>No tasks yet — add some!</div>
       )}
 
       <div style={styles.taskList}>
@@ -96,6 +123,14 @@ export default function CheckTasks({ user, updateUser }) {
               >
                 {done ? "✓ Done" : "Pending"}
               </span>
+
+              {/* delete task */}
+              <button
+                style={styles.deleteBtn}
+                onClick={() => deleteTask(task.id)}
+              >
+                ✖ Remove
+              </button>
             </div>
           );
         })}
