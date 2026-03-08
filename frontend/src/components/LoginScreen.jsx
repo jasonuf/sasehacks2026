@@ -60,7 +60,7 @@ export default function LoginScreen({ onLogin, error }) {
         ...styles.seaweed,
         position: "absolute",
         left: "2%", // Slight padding from the edge
-        bottom: "-10px", // Tuck the base slightly below the screen
+        bottom: "40px", // Tuck the base slightly below the screen
         width: "150px",
         transformOrigin: "bottom center",
       }}
@@ -73,7 +73,7 @@ export default function LoginScreen({ onLogin, error }) {
         ...styles.seaweed,
         position: "absolute",
         right: "2%",
-        bottom: "-10px",
+        bottom: "40px",
         width: "150px",
         transformOrigin: "bottom center",
       }}
