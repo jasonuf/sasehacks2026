@@ -46,7 +46,7 @@ export default function LoginScreen({ onLogin, error }) {
         {/* SEAWEED LOWER CORNERS */}
     <div style={styles.seaweedContainer}>
       <img
-        src="/images/seaweed.webp"
+        src="seaweed.webp.webp"
         alt="seaweed left"
         style={{
           ...styles.seaweed,
@@ -56,7 +56,7 @@ export default function LoginScreen({ onLogin, error }) {
       />
 
       <img
-        src="/images/seaweed.webp"
+        src="seaweed.webp.webp"
         alt="seaweed right"
         style={{
           ...styles.seaweed,
@@ -65,7 +65,7 @@ export default function LoginScreen({ onLogin, error }) {
         }}
       />
     </div>
-    
+
       <div style={styles.loginCard}>
 
         <div style={styles.loginLogo}>✓</div>
