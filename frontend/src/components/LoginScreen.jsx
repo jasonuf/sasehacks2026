@@ -56,7 +56,7 @@ export default function LoginScreen({ onLogin, error }) {
         src="seaweed.webp.webp"
         alt="seaweed left"
         style={{
-          ...styles.seaweed
+          ...styles.seaweed,
           left: "5%", 
           bottom: "0", // Pushes the base slightly off-screen for a "planted" look
           width: "300px",  // Enlarged size
@@ -71,7 +71,7 @@ export default function LoginScreen({ onLogin, error }) {
           ...styles.seaweed,
           right: "5%",
           bottom: "0", 
-          width: "300px", // Enlarged size
+          width: "300p", // Enlarged size
           height: "auto",
           transform: "scaleX(-1)", // Optional: Flips the image so it's not a mirror image
         }}
