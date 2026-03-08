@@ -75,6 +75,7 @@ const styles = {
     textAlign: "center",
     color: "#EFECE3",
     fontSize: 13,
+    fontWeight: 700,
     marginBottom: 32,
     marginTop: 0,
   },
