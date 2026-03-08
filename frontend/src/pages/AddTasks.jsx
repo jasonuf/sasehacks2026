@@ -17,6 +17,7 @@ export default function AddTasks({ user, updateUser }) {
     { name: "Socialize", icon: "👥"},{name: "Relax", icon: "🛋️"},{name: "Hobby", icon: "🎨"},
     { name: "Volunteer", icon: "🤝" },{ name: "Self-Care", icon: "🛀" }, {name: "Other", icon: "➕"},
   ];
+  const [jellyfishList, setJellyfishList] = useState([]);
   const spawnJellyfish = () => {
     const id = Date.now() + Math.random(); // unique ID
     const top = 20 + Math.random() * 50; // random vertical position
@@ -119,7 +120,7 @@ export default function AddTasks({ user, updateUser }) {
       {jellyfishList.map((j) => (
         <img
           key={j.id}
-          src="jellyfish-removebg-preview.png"
+          src="/jellyfish-removebg-preview.png"
           alt="jellyfish"
           style={{
             position: "fixed",
