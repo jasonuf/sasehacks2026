@@ -43,6 +43,44 @@ export default function LoginScreen({ onLogin, error }) {
         />
       ))}
     </div>
+
+    <div style={{
+      position: "fixed", 
+      bottom: 0,
+      left: 0,
+      right: 0,
+      height: "350px", 
+      width: "100%",
+      pointerEvents: "none",
+      zIndex: 3, 
+    }}>
+      <img
+        src="seaweed.webp.webp"
+        alt="seaweed left"
+        style={{
+          ...styles.seaweed,
+          position: "absolute",
+          left: "0", 
+          bottom: "0", // Pushes the base slightly off-screen for a "planted" look
+          width: "350px",  // Enlarged size
+          height: "auto",
+        }}
+      />
+
+      <img
+        src="seaweed.webp.webp"
+        alt="seaweed right"
+        style={{
+          ...styles.seaweed,
+          position: "absolute",
+          right: "0",
+          bottom: "0", 
+          width: "350px", // Enlarged size
+          height: "auto",
+          transform: "scaleX(-1)", 
+        }}
+      />
+    </div>
       <div style={styles.loginCard}>
 
         <img src="/appLogo.png" alt="Logo" width="120" />
